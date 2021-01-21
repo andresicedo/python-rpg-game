@@ -11,7 +11,7 @@ In this simple RPG game, the hero fights the goblin. He has the options to:
 
 """
 
-def main():
+def main(): 
     my_hero = Hero()
     goblin = Goblin()
     zombie = Zombie()
@@ -29,16 +29,27 @@ def main():
         print("> ",)
         user_input = input()
         if user_input == "1":
-            # Hero attacks goblin
-            my_hero.attack_goblin(goblin)
-            if goblin.health <= 0:
-                print("The goblin is dead.")
-            # Goblin attacks hero
-            else:
-                goblin.attack(my_hero)
+            print("Would you like to attempt a special attack that could inflict double the damage?\n1. Yes\n2. No\n")
+            user_input = input()
+            if user_input == "1":
+                my_hero.spec_atk(goblin)
+                if goblin.health <= 0:
+                    print("The goblin is dead.")
+                else:
+                    goblin.attack(my_hero)
+                if my_hero.health <= 0:
+                    print("You are dead.")
+                    goblin.print_status()
+            if user_input == "2":
+                # Hero attacks goblin
+                my_hero.attack_goblin(goblin)
+                if goblin.health <= 0:
+                    print("The goblin is dead.")
+                else:
+                    # Goblin attacks hero
+                    goblin.attack(my_hero)
             if my_hero.health <= 0:
                 print("You are dead.")
-                goblin.print_status()
         elif user_input == "2":
             pass
         elif user_input == "3":
